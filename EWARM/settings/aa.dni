@@ -9,7 +9,7 @@ TriggerName=main
 LimitSize=0
 ByteLimit=50
 [DebugChecksum]
-Checksum=-468368947
+Checksum=595602924
 [Exceptions]
 StopOnUncaught=_ 0
 StopOnThrow=_ 0
@@ -114,7 +114,8 @@ Exclusions=
 mode=0
 [Breakpoints2]
 Bp0=_ 1 "EMUL_CODE" "{$PROJ_DIR$\..\mydrivers\nrf24l01.c}.53.3" 0 0 1 "" 0 "" 0
-Count=1
+Bp1=_ 1 "EMUL_CODE" "{$PROJ_DIR$\..\Src\freertos.c}.235.1" 0 0 1 "" 0 "" 0
+Count=2
 [Aliases]
 Count=0
 SuppressDialog=0

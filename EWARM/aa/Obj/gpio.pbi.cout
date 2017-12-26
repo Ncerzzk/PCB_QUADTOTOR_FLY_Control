@@ -14,6 +14,12 @@ C:\Users\ncer\Desktop\四轴飞行器\EWARM/../Drivers/CMSIS/Device/ST/STM32F4xx/Incl
 -I
 C:\Users\ncer\Desktop\四轴飞行器\EWARM/../Drivers/CMSIS/Include
 -I
+C:\Users\ncer\Desktop\四轴飞行器\EWARM/../Middlewares/Third_Party/FreeRTOS/Source/portable/IAR/ARM_CM4F
+-I
+C:\Users\ncer\Desktop\四轴飞行器\EWARM/../Middlewares/Third_Party/FreeRTOS/Source/include
+-I
+C:\Users\ncer\Desktop\四轴飞行器\EWARM/../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS
+-I
 D:\Program Files (x86)\IAR Systems\Embedded Workbench 6.5\arm\CMSIS\Include
 -I
 D:\Program Files (x86)\IAR Systems\Embedded Workbench 6.5\arm\inc
@@ -32,10 +38,20 @@ C:\Users\ncer\Desktop\四轴飞行器\Drivers\CMSIS\Device\ST\STM32F4xx\Include
 -I
 C:\Users\ncer\Desktop\四轴飞行器\Drivers\CMSIS\Include
 -I
+C:\Users\ncer\Desktop\四轴飞行器\Middlewares\Third_Party\FreeRTOS\Source\portable\IAR\ARM_CM4F
+-I
+C:\Users\ncer\Desktop\四轴飞行器\Middlewares\Third_Party\FreeRTOS\Source\include
+-I
+C:\Users\ncer\Desktop\四轴飞行器\Middlewares\Third_Party\FreeRTOS\Source\CMSIS_RTOS
+-I
 D:\Program Files (x86)\IAR Systems\Embedded Workbench 6.5\arm\CMSIS\Include
 -DUSE_HAL_DRIVER=1
 -DSTM32F405xx=1
 -DARM_MATH_CM4=1
+-DARM_MATH_MATRIX_CHECK=1
+-DARM_MATH_ROUNDING=1
+-D__FPU_USED=1
+-D__ICCARM__=1
 -D__CHAR_BITS__=8
 -D__CHAR_MAX__=0xff
 -D__CHAR_MIN__=0
@@ -232,7 +248,6 @@ D:\Program Files (x86)\IAR Systems\Embedded Workbench 6.5\arm\CMSIS\Include
 -D__ARM_PROFILE_M__=1
 -D__CORE__=__ARM7EM__
 -D__CPU_MODE__=1
--D__ICCARM__=1
 -D__INTERWORKING__=1
 -D__PLAIN_INT_BITFIELD_IS_SIGNED__=0
 -D__HAS_WEAK__=1
@@ -241,8 +256,8 @@ D:\Program Files (x86)\IAR Systems\Embedded Workbench 6.5\arm\CMSIS\Include
 -D__HAS_LOCATED_DECLARATION__=1
 -D__HAS_LOCATED_WITH_INIT__=1
 -D__IAR_COMPILERBASE__=593409
--D__DATE__="Dec 22 2017"
--D__TIME__="22:14:16"
+-D__DATE__="Dec 24 2017"
+-D__TIME__="21:26:41"
 -D__STDC__=1
 -D__STDC_VERSION__=199901L
 -D__STDC_HOSTED__=1
@@ -267,9 +282,6 @@ D:\Program Files (x86)\IAR Systems\Embedded Workbench 6.5\arm\CMSIS\Include
 -D__EDG_SYSV=0
 -D__EDG_ANSIC=1
 -D__EDG_CPP0X_IL_EXTENSIONS_SUPPORTED=1
--D_DLIB_CONFIG_FILE_HEADER_NAME="D:\Program Files (x86)\IAR Systems\Embedded Workbench 6.5\arm\INC\c\DLib_Config_Full.h"
--D_DLIB_CONFIG_FILE_STRING="D:\\Program Files (x86)\\IAR Systems\\Embedded Workbench 6.5\\arm\\INC\\c\\DLib_Config_Full.h"
--D__VERSION__="IAR ANSI C/C++ Compiler V6.60.1.5097/W32 for ARM"
 -D__CODE_MEMORY_LIST1__()=__CODE_MEM_HELPER1__(__code, 0 )
 -D__CODE_MEMORY_LIST2__(_P1)=__CODE_MEM_HELPER2__(__code, 0 ,  _P1 )
 -D__CODE_MEMORY_LIST3__(_P1, _P2)=__CODE_MEM_HELPER3__(__code, 0 ,  _P1 ,  _P2 )

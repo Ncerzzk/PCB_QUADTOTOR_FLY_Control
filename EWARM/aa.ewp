@@ -313,9 +313,6 @@
           <state>$PROJ_DIR$/../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy</state>
           <state>$PROJ_DIR$/../Drivers/CMSIS/Device/ST/STM32F4xx/Include</state>
           <state>$PROJ_DIR$/../Drivers/CMSIS/Include</state>
-          <state>$PROJ_DIR$/../Middlewares/Third_Party/FreeRTOS/Source/portable/IAR/ARM_CM4F</state>
-          <state>$PROJ_DIR$/../Middlewares/Third_Party/FreeRTOS/Source/include</state>
-          <state>$PROJ_DIR$/../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS</state>
         </option>
         <option>
           <name>CCStdIncCheck</name>
@@ -968,7 +965,13 @@
         <name>$PROJ_DIR$\..\mydrivers\command.c</name>
       </file>
       <file>
+        <name>$PROJ_DIR$\..\mydrivers\control.c</name>
+      </file>
+      <file>
         <name>$PROJ_DIR$\..\mydrivers\mpu9250.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\mydrivers\ms5611.c</name>
       </file>
       <file>
         <name>$PROJ_DIR$\..\mydrivers\nrf24l01.c</name>
@@ -981,9 +984,6 @@
       <name>User</name>
       <file>
         <name>$PROJ_DIR$\..\Src\adc.c</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\Src\freertos.c</name>
       </file>
       <file>
         <name>$PROJ_DIR$\..\Src\gpio.c</name>
@@ -999,9 +999,6 @@
       </file>
       <file>
         <name>$PROJ_DIR$\..\Src\stm32f4xx_hal_msp.c</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\Src\stm32f4xx_hal_timebase_TIM.c</name>
       </file>
       <file>
         <name>$PROJ_DIR$\..\Src\stm32f4xx_it.c</name>
@@ -1086,42 +1083,6 @@
       </file>
       <file>
         <name>$PROJ_DIR$\..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_uart.c</name>
-      </file>
-    </group>
-  </group>
-  <group>
-    <name>Middlewares</name>
-    <group>
-      <name>FreeRTOS</name>
-      <file>
-        <name>$PROJ_DIR$\..\Middlewares\Third_Party\FreeRTOS\Source\CMSIS_RTOS\cmsis_os.c</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\Middlewares\Third_Party\FreeRTOS\Source\croutine.c</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\Middlewares\Third_Party\FreeRTOS\Source\event_groups.c</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\Middlewares\Third_Party\FreeRTOS\Source\portable\MemMang\heap_4.c</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\Middlewares\Third_Party\FreeRTOS\Source\list.c</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\Middlewares\Third_Party\FreeRTOS\Source\portable\IAR\ARM_CM4F\port.c</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\Middlewares\Third_Party\FreeRTOS\Source\portable\IAR\ARM_CM4F\portasm.s</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\Middlewares\Third_Party\FreeRTOS\Source\queue.c</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\Middlewares\Third_Party\FreeRTOS\Source\tasks.c</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\Middlewares\Third_Party\FreeRTOS\Source\timers.c</name>
       </file>
     </group>
   </group>

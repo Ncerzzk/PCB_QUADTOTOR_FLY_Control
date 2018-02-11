@@ -34,7 +34,6 @@
 #include "stm32f4xx_hal.h"
 #include "stm32f4xx.h"
 #include "stm32f4xx_it.h"
-#include "cmsis_os.h"
 
 /* USER CODE BEGIN 0 */
 
@@ -42,11 +41,10 @@
 
 /* External variables --------------------------------------------------------*/
 extern I2C_HandleTypeDef hi2c3;
+extern TIM_HandleTypeDef htim7;
 extern UART_HandleTypeDef huart2;
 extern UART_HandleTypeDef huart6;
-
-extern TIM_HandleTypeDef htim10;
-
+void Set_Speed(int CHn,float speed);
 /******************************************************************************/
 /*            Cortex-M4 Processor Interruption and Exception Handlers         */ 
 /******************************************************************************/
@@ -70,8 +68,11 @@ void NMI_Handler(void)
 void HardFault_Handler(void)
 {
   /* USER CODE BEGIN HardFault_IRQn 0 */
-
+  for(int i=0;i<4;++i){
+    Set_Speed(i+1,0);
+  }
   /* USER CODE END HardFault_IRQn 0 */
+  
   while (1)
   {
   }
@@ -129,6 +130,19 @@ void UsageFault_Handler(void)
 }
 
 /**
+* @brief This function handles System service call via SWI instruction.
+*/
+void SVC_Handler(void)
+{
+  /* USER CODE BEGIN SVCall_IRQn 0 */
+
+  /* USER CODE END SVCall_IRQn 0 */
+  /* USER CODE BEGIN SVCall_IRQn 1 */
+
+  /* USER CODE END SVCall_IRQn 1 */
+}
+
+/**
 * @brief This function handles Debug monitor.
 */
 void DebugMon_Handler(void)
@@ -142,6 +156,19 @@ void DebugMon_Handler(void)
 }
 
 /**
+* @brief This function handles Pendable request for system service.
+*/
+void PendSV_Handler(void)
+{
+  /* USER CODE BEGIN PendSV_IRQn 0 */
+
+  /* USER CODE END PendSV_IRQn 0 */
+  /* USER CODE BEGIN PendSV_IRQn 1 */
+
+  /* USER CODE END PendSV_IRQn 1 */
+}
+
+/**
 * @brief This function handles System tick timer.
 */
 void SysTick_Handler(void)
@@ -149,7 +176,8 @@ void SysTick_Handler(void)
   /* USER CODE BEGIN SysTick_IRQn 0 */
 
   /* USER CODE END SysTick_IRQn 0 */
-  osSystickHandler();
+  HAL_IncTick();
+  HAL_SYSTICK_IRQHandler();
   /* USER CODE BEGIN SysTick_IRQn 1 */
 
   /* USER CODE END SysTick_IRQn 1 */
@@ -163,20 +191,6 @@ void SysTick_Handler(void)
 /******************************************************************************/
 
 /**
-* @brief This function handles TIM1 update interrupt and TIM10 global interrupt.
-*/
-void TIM1_UP_TIM10_IRQHandler(void)
-{
-  /* USER CODE BEGIN TIM1_UP_TIM10_IRQn 0 */
-
-  /* USER CODE END TIM1_UP_TIM10_IRQn 0 */
-  HAL_TIM_IRQHandler(&htim10);
-  /* USER CODE BEGIN TIM1_UP_TIM10_IRQn 1 */
-
-  /* USER CODE END TIM1_UP_TIM10_IRQn 1 */
-}
-
-/**
 * @brief This function handles USART2 global interrupt.
 */
 void USART2_IRQHandler(void)
@@ -188,6 +202,20 @@ void USART2_IRQHandler(void)
   /* USER CODE BEGIN USART2_IRQn 1 */
 
   /* USER CODE END USART2_IRQn 1 */
+}
+
+/**
+* @brief This function handles TIM7 global interrupt.
+*/
+void TIM7_IRQHandler(void)
+{
+  /* USER CODE BEGIN TIM7_IRQn 0 */
+
+  /* USER CODE END TIM7_IRQn 0 */
+  HAL_TIM_IRQHandler(&htim7);
+  /* USER CODE BEGIN TIM7_IRQn 1 */
+
+  /* USER CODE END TIM7_IRQn 1 */
 }
 
 /**

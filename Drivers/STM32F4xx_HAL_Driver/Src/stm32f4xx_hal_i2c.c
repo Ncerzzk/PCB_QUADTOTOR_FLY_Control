@@ -712,7 +712,6 @@ HAL_StatusTypeDef HAL_I2C_Master_Receive(I2C_HandleTypeDef *hi2c, uint16_t DevAd
 
   /* Init tickstart for timeout management*/
   tickstart = HAL_GetTick();
-
   if(hi2c->State == HAL_I2C_STATE_READY)
   {
     /* Wait until BUSY flag is reset */

@@ -14,12 +14,6 @@ C:\Users\ncer\Desktop\四轴飞行器\EWARM/../Drivers/CMSIS/Device/ST/STM32F4xx/Incl
 -I
 C:\Users\ncer\Desktop\四轴飞行器\EWARM/../Drivers/CMSIS/Include
 -I
-C:\Users\ncer\Desktop\四轴飞行器\EWARM/../Middlewares/Third_Party/FreeRTOS/Source/portable/IAR/ARM_CM4F
--I
-C:\Users\ncer\Desktop\四轴飞行器\EWARM/../Middlewares/Third_Party/FreeRTOS/Source/include
--I
-C:\Users\ncer\Desktop\四轴飞行器\EWARM/../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS
--I
 D:\Program Files (x86)\IAR Systems\Embedded Workbench 6.5\arm\CMSIS\Include
 -I
 D:\Program Files (x86)\IAR Systems\Embedded Workbench 6.5\arm\inc
@@ -37,12 +31,6 @@ C:\Users\ncer\Desktop\四轴飞行器\Drivers\STM32F4xx_HAL_Driver\Inc\Legacy
 C:\Users\ncer\Desktop\四轴飞行器\Drivers\CMSIS\Device\ST\STM32F4xx\Include
 -I
 C:\Users\ncer\Desktop\四轴飞行器\Drivers\CMSIS\Include
--I
-C:\Users\ncer\Desktop\四轴飞行器\Middlewares\Third_Party\FreeRTOS\Source\portable\IAR\ARM_CM4F
--I
-C:\Users\ncer\Desktop\四轴飞行器\Middlewares\Third_Party\FreeRTOS\Source\include
--I
-C:\Users\ncer\Desktop\四轴飞行器\Middlewares\Third_Party\FreeRTOS\Source\CMSIS_RTOS
 -I
 D:\Program Files (x86)\IAR Systems\Embedded Workbench 6.5\arm\CMSIS\Include
 -DUSE_HAL_DRIVER=1
@@ -256,8 +244,8 @@ D:\Program Files (x86)\IAR Systems\Embedded Workbench 6.5\arm\CMSIS\Include
 -D__HAS_LOCATED_DECLARATION__=1
 -D__HAS_LOCATED_WITH_INIT__=1
 -D__IAR_COMPILERBASE__=593409
--D__DATE__="Dec 26 2017"
--D__TIME__="11:26:45"
+-D__DATE__="Jan 22 2018"
+-D__TIME__="11:08:41"
 -D__STDC__=1
 -D__STDC_VERSION__=199901L
 -D__STDC_HOSTED__=1

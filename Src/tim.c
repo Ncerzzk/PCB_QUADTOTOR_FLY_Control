@@ -5,6 +5,7 @@
 #include "mpu9250.h"
 #include "angle.h"
 #include "control.h"
+#include "ms5611.h"
 /* USER CODE END 0 */
 
 TIM_HandleTypeDef htim3;
@@ -265,6 +266,7 @@ int count_2ms=0;
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
   int16_t ac[3],gy[3],mag[3];
   int i;
+  float height;
   if(htim->Instance==TIM7){
     
     count_2ms++;
@@ -291,7 +293,8 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
     //Free_Falling_Detect(Accel);
     
     Fly_Control();
-     
+    
+    MS5611_Read(&MS5611,&height);
   }
 }
 

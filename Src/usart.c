@@ -47,7 +47,7 @@
 #include "command.h"
 char buffer_rx_temp;
 
-char buffer_rx[20];
+char buffer_rx[30];
 
 int buffer_rx_count=0;
 

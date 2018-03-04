@@ -50,6 +50,7 @@
 #include "nrf24l01.h"
 #include "command.h"
 #include "base.h"
+#include "ms5611.h"
 /* USER CODE END Includes */
 
 /* Private variables ---------------------------------------------------------*/
@@ -70,9 +71,10 @@ void SystemClock_Config(void);
 /* USER CODE BEGIN 0 */
 extern MPU_Dev MPU9250;
 extern NRF_Dev NRF24l01;
+extern MS5611_Dev MS5611;
 
 extern char Send_Wave_Flag;
-extern char buffer_rx[20];
+extern char buffer_rx[30];
 extern char buffer_rx_OK;
 extern char buffer_rx_temp;
 
@@ -111,11 +113,12 @@ int main(void)
   MX_ADC1_Init();
   //MX_USART2_UART_Init();
   MX_TIM3_Init();
-  MX_USART6_UART_Init();  
+  MX_USART6_UART_Init();
 
   /* USER CODE BEGIN 2 */
   MPU9250_Init(&MPU9250);
   NRF_Init(&NRF24l01);
+  MS5611_Init(&MS5611);
   command_init();
   MX_TIM7_Init();   //等所有的都初始化完毕，在初始化定时器（开启定时中断）
 //  
@@ -127,6 +130,8 @@ int main(void)
   while (1)
   {
   /* USER CODE END WHILE */
+    nrf_send_message(&NRF24l01);
+   // nrf_receive(&NRF24l01);
     if(buffer_rx_OK){
       analize(buffer_rx);
       buffer_rx_OK=0;

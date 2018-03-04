@@ -62,7 +62,7 @@ extern void _Error_Handler(char *, int);
 void MX_I2C3_Init(void);
 
 /* USER CODE BEGIN Prototypes */
-
+uint8_t I2C_Read_Buffer(uint8_t slaveAddr,uint8_t readAddr,uint8_t *pBuffer,uint16_t len);
 /* USER CODE END Prototypes */
 
 #ifdef __cplusplus

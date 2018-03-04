@@ -46,7 +46,7 @@
 
 /* Private define ------------------------------------------------------------*/
 
-#define CE_Pin GPIO_PIN_4
+#define CE_Pin GPIO_PIN_1
 #define CE_GPIO_Port GPIOA
 #define CSN_Pin GPIO_PIN_5
 #define CSN_GPIO_Port GPIOA

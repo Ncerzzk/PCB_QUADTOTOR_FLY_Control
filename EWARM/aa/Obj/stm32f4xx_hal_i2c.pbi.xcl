@@ -1,38 +1,43 @@
-"C:\Users\ncer\Desktop\code\PCB_QUADTOTOR_FLY_Control\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_i2c.c"
+"C:\Users\ncer\Desktop\四轴飞行器\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_i2c.c"
 -std=c11
--ferror-limit=100
+-ferror-limit=0
+-fbracket-depth=512
 -I
-C:\Users\ncer\Desktop\code\PCB_QUADTOTOR_FLY_Control\EWARM/../Inc
+C:\Users\ncer\Desktop\四轴飞行器\EWARM/../Inc
 -I
-C:\Users\ncer\Desktop\code\PCB_QUADTOTOR_FLY_Control\EWARM/../mydrivers
+C:\Users\ncer\Desktop\四轴飞行器\EWARM/../mydrivers
 -I
-C:\Users\ncer\Desktop\code\PCB_QUADTOTOR_FLY_Control\EWARM/../Drivers/STM32F4xx_HAL_Driver/Inc
+C:\Users\ncer\Desktop\四轴飞行器\EWARM/../Drivers/STM32F4xx_HAL_Driver/Inc
 -I
-C:\Users\ncer\Desktop\code\PCB_QUADTOTOR_FLY_Control\EWARM/../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy
+C:\Users\ncer\Desktop\四轴飞行器\EWARM/../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy
 -I
-C:\Users\ncer\Desktop\code\PCB_QUADTOTOR_FLY_Control\EWARM/../Drivers/CMSIS/Device/ST/STM32F4xx/Include
+C:\Users\ncer\Desktop\四轴飞行器\EWARM/../Drivers/CMSIS/Device/ST/STM32F4xx/Include
 -I
-C:\Users\ncer\Desktop\code\PCB_QUADTOTOR_FLY_Control\EWARM/../Drivers/CMSIS/Include
+C:\Users\ncer\Desktop\四轴飞行器\EWARM/../Drivers/CMSIS/Include
 -I
-E:\Program Files (x86)\IAR Systems\Embedded Workbench 8.0\arm\CMSIS\Include
+D:\Program Files (x86)\IAR Systems\Embedded Workbench 8.0\arm\CMSIS\Core\Include
 -I
-E:\Program Files (x86)\IAR Systems\Embedded Workbench 8.0\arm\inc
+D:\Program Files (x86)\IAR Systems\Embedded Workbench 8.0\arm\CMSIS\DSP\Include
 -I
-E:\Program Files (x86)\IAR Systems\Embedded Workbench 8.0\arm\inc\c
+D:\Program Files (x86)\IAR Systems\Embedded Workbench 8.0\arm\inc
 -I
-C:\Users\ncer\Desktop\code\PCB_QUADTOTOR_FLY_Control\Inc
+D:\Program Files (x86)\IAR Systems\Embedded Workbench 8.0\arm\inc\c
 -I
-C:\Users\ncer\Desktop\code\PCB_QUADTOTOR_FLY_Control\mydrivers
+C:\Users\ncer\Desktop\四轴飞行器\Inc
 -I
-C:\Users\ncer\Desktop\code\PCB_QUADTOTOR_FLY_Control\Drivers\STM32F4xx_HAL_Driver\Inc
+C:\Users\ncer\Desktop\四轴飞行器\mydrivers
 -I
-C:\Users\ncer\Desktop\code\PCB_QUADTOTOR_FLY_Control\Drivers\STM32F4xx_HAL_Driver\Inc\Legacy
+C:\Users\ncer\Desktop\四轴飞行器\Drivers\STM32F4xx_HAL_Driver\Inc
 -I
-C:\Users\ncer\Desktop\code\PCB_QUADTOTOR_FLY_Control\Drivers\CMSIS\Device\ST\STM32F4xx\Include
+C:\Users\ncer\Desktop\四轴飞行器\Drivers\STM32F4xx_HAL_Driver\Inc\Legacy
 -I
-C:\Users\ncer\Desktop\code\PCB_QUADTOTOR_FLY_Control\Drivers\CMSIS\Include
+C:\Users\ncer\Desktop\四轴飞行器\Drivers\CMSIS\Device\ST\STM32F4xx\Include
 -I
-E:\Program Files (x86)\IAR Systems\Embedded Workbench 8.0\arm\CMSIS\Include
+C:\Users\ncer\Desktop\四轴飞行器\Drivers\CMSIS\Include
+-I
+D:\Program Files (x86)\IAR Systems\Embedded Workbench 8.0\arm\CMSIS\Core\Include
+-I
+D:\Program Files (x86)\IAR Systems\Embedded Workbench 8.0\arm\CMSIS\DSP\Include
 -D__CHAR_BITS__=8
 -D__CHAR_MAX__=0xff
 -D__CHAR_MIN__=0
@@ -181,19 +186,17 @@ E:\Program Files (x86)\IAR Systems\Embedded Workbench 8.0\arm\CMSIS\Include
 -D__JMP_BUF_ELEMENT_TYPE__=unsigned long long int
 -D__JMP_BUF_NUM_ELEMENTS__=16
 -D__TID__=0xcf60
--D__VER__=8010001
--D__BUILD_NUMBER__=12857
+-D__VER__=8022001
+-D__BUILD_NUMBER__=15669
 -D__IAR_SYSTEMS_ICC__=9
 -D__LITTLE_ENDIAN__=1
 -D__BOOL_TYPE__=unsigned char
 -D__BOOL_SIZE__=1
--D__WCHAR_T_TYPE__=unsigned long int
+-D__WCHAR_T_TYPE__=unsigned int
 -D__WCHAR_T_SIZE__=4
 -D__WCHAR_T_MAX__=0xffffffffU
 -D__DEF_PTR_MEM__=__data
 -D__DEF_PTR_SIZE__=4
--D__CODE_MEMORY_LIST3__(_P1,_P2)=__CODE_MEM_HELPER3__(__code, 0, _P1, _P2)
--D__DATA_MEMORY_LIST3__(_P1,_P2)=__DATA_MEM_HELPER3__(__data, 0, _P1, _P2)
 -D__DATA_MEM0__=__data
 -D__DATA_MEM0_POINTER_OK__=1
 -D__DATA_MEM0_UNIQUE_POINTER__=1
@@ -209,15 +212,9 @@ E:\Program Files (x86)\IAR Systems\Embedded Workbench 8.0\arm\CMSIS\Include
 -D__CODE_MEM0__=__code
 -D__CODE_MEM0_POINTER_OK__=1
 -D__CODE_MEM0_UNIQUE_POINTER__=1
--D__CODE_PTR_MEMORY_LIST3__(_P1,_P2)=__CODE_PTR_MEM_HELPER3__(__code, 0, _P1, _P2)
--D__DATA_PTR_MEMORY_LIST3__(_P1,_P2)=__DATA_PTR_MEM_HELPER3__(__data, 0, _P1, _P2)
--D__VAR_MEMORY_LIST3__(_P1,_P2)=__VAR_MEM_HELPER3__(__data, 0, _P1, _P2)
 -D__HEAP_MEM0__=0
 -D__HEAP_DEFAULT_MEM__=0
--D__HEAP_MEMORY_LIST3__(_P1,_P2)=__HEAP_MEM_HELPER3__(__data, 0, _P1, _P2)
 -D__MULTIPLE_HEAPS__=0
--D__TOPM_DATA_MEMORY_LIST3__(_P1,_P2)=
--D__TOPP_DATA_MEMORY_LIST3__(_P1,_P2)=__TOPP_DATA_MEM_HELPER3__(__data, 0, _P1, _P2)
 -D__DEF_HEAP_MEM__=__data
 -D__PRAGMA_PACK_ON__=1
 -D__MULTIPLE_INHERITANCE__=1
@@ -249,12 +246,15 @@ E:\Program Files (x86)\IAR Systems\Embedded Workbench 8.0\arm\CMSIS\Include
 -D__ARM_ARCH_PROFILE='M'
 -D__ARM_BIG_ENDIAN=0
 -D__ARM_FEATURE_DSP=1
+-D__ARM_FEATURE_FMA=1
 -D__ARM_FEATURE_IDIV=1
+-D__ARM_FEATURE_UNALIGNED=1
 -D__ARM_FP=6
 -D__ARM_MEDIA__=1
 -D__ARM_PROFILE_M__=1
 -D__CORE__=__ARM7EM__
 -D__CPU_MODE__=1
+-D__ICCARM_INTRINSICS_VERSION__=2
 -D__ICCARM__=1
 -D__INTERWORKING__=1
 -D__PLAIN_INT_BITFIELD_IS_SIGNED__=0
@@ -263,12 +263,11 @@ E:\Program Files (x86)\IAR Systems\Embedded Workbench 8.0\arm\CMSIS\Include
 -D__HAS_JOINED_TYPES__=1
 -D__HAS_LOCATED_DECLARATION__=1
 -D__HAS_LOCATED_WITH_INIT__=1
--D__IAR_COMPILERBASE__=655617
--D__IAR_COMPILERBASE_STR__=10.1.1.179
+-D__IAR_COMPILERBASE__=655877
+-D__IAR_COMPILERBASE_STR__=10.2.5.200
 -D__UNICODE_SOURCE_SUPPORTED__=1
 -D__STDC__=1
 -D__STDC_VERSION__=201112L
--D__STDC_HOSTED__=1
 -D__STDC_NO_VLA__=1
 -D__MEMORY_ORDER_RELAXED__=0
 -D__MEMORY_ORDER_CONSUME__=1
@@ -281,6 +280,7 @@ E:\Program Files (x86)\IAR Systems\Embedded Workbench 8.0\arm\CMSIS\Include
 -D__STDC_LIB_EXT1__=201112L
 -D__STDC_NO_THREADS__=1
 -D__STDC_ISO_10646__=201103L
+-D__STDC_HOSTED__=1
 -D__EDG_IA64_ABI=1
 -D__EDG_IA64_ABI_VARIANT_CTORS_AND_DTORS_RETURN_THIS=1
 -D__EDG_IA64_ABI_USE_INT_STATIC_INIT_GUARD=1
@@ -288,7 +288,7 @@ E:\Program Files (x86)\IAR Systems\Embedded Workbench 8.0\arm\CMSIS\Include
 -D__cpp_static_assert=200410
 -D__EDG_TYPE_TRAITS_ENABLED=1
 -D__EDG__=1
--D__EDG_VERSION__=412
+-D__EDG_VERSION__=413
 -D__EDG_SIZE_TYPE__=unsigned int
 -D__EDG_PTRDIFF_TYPE__=int
 -D__EDG_DELTA_TYPE=int
@@ -304,42 +304,53 @@ E:\Program Files (x86)\IAR Systems\Embedded Workbench 8.0\arm\CMSIS\Include
 -D__EDG_SYSV=0
 -D__EDG_ANSIC=1
 -D__EDG_CPP11_IL_EXTENSIONS_SUPPORTED=1
+-D__EDG_FLOAT80_ENABLING_POSSIBLE=0
+-D__EDG_FLOAT128_ENABLING_POSSIBLE=0
 -DUSE_HAL_DRIVER=1
 -DSTM32F405xx=1
 -DARM_MATH_CM4=1
 -DARM_MATH_MATRIX_CHECK=1
 -DARM_MATH_ROUNDING=1
 -D__FPU_USED=1
--D_DLIB_CONFIG_FILE_HEADER_NAME=u8"E:\\Program Files (x86)\\IAR Systems\\Embedded Workbench 8.0\\arm\\INC\\c\\DLib_Config_Full.h"
--D_DLIB_CONFIG_FILE_STRING=u8"E:\\Program Files (x86)\\IAR Systems\\Embedded Workbench 8.0\\arm\\INC\\c\\DLib_Config_Full.h"
--D__VERSION__="IAR ANSI C/C++ Compiler V8.10.1.12857/W32 for ARM"
+-D_DLIB_CONFIG_FILE_HEADER_NAME="D:\\Program Files (x86)\\IAR Systems\\Embedded Workbench 8.0\\arm\\INC\\c\\DLib_Config_Full.h"
+-D_DLIB_CONFIG_FILE_STRING="D:\\Program Files (x86)\\IAR Systems\\Embedded Workbench 8.0\\arm\\INC\\c\\DLib_Config_Full.h"
+-D__VERSION__="IAR ANSI C/C++ Compiler V8.22.1.15669/W32 for ARM"
+-D__ICCARM_OLD_DEFINED_VAARGS__=1
+-D__VA_STACK_ALIGN__=8
 -D__CODE_MEMORY_LIST1__()=__CODE_MEM_HELPER1__(__code, 0 )
 -D__CODE_MEMORY_LIST2__(_P1)=__CODE_MEM_HELPER2__(__code, 0 ,  _P1 )
--D__CODE_MEMORY_LIST3__(_P1, _P2)=__CODE_MEM_HELPER3__(__code, 0 ,  _P1 ,  _P2 )
+-D__CODE_MEMORY_LIST3__(_P1,_P2)=__CODE_MEM_HELPER3__(__code, 0 ,  _P1 ,  _P2 )
 -D__DATA_MEMORY_LIST1__()=__DATA_MEM_HELPER1__(__data, 0 )
 -D__DATA_MEMORY_LIST2__(_P1)=__DATA_MEM_HELPER2__(__data, 0 ,  _P1 )
--D__DATA_MEMORY_LIST3__(_P1, _P2)=__DATA_MEM_HELPER3__(__data, 0 ,  _P1 ,  _P2 )
+-D__DATA_MEMORY_LIST3__(_P1,_P2)=__DATA_MEM_HELPER3__(__data, 0 ,  _P1 ,  _P2 )
 -D__CODE_PTR_MEMORY_LIST1__()=__CODE_PTR_MEM_HELPER1__(__code, 0 )
 -D__CODE_PTR_MEMORY_LIST2__(_P1)=__CODE_PTR_MEM_HELPER2__(__code, 0 ,  _P1 )
--D__CODE_PTR_MEMORY_LIST3__(_P1, _P2)=__CODE_PTR_MEM_HELPER3__(__code, 0 ,  _P1 ,  _P2 )
+-D__CODE_PTR_MEMORY_LIST3__(_P1,_P2)=__CODE_PTR_MEM_HELPER3__(__code, 0 ,  _P1 ,  _P2 )
 -D__DATA_PTR_MEMORY_LIST1__()=__DATA_PTR_MEM_HELPER1__(__data, 0 )
 -D__DATA_PTR_MEMORY_LIST2__(_P1)=__DATA_PTR_MEM_HELPER2__(__data, 0 ,  _P1 )
--D__DATA_PTR_MEMORY_LIST3__(_P1, _P2)=__DATA_PTR_MEM_HELPER3__(__data, 0 ,  _P1 ,  _P2 )
+-D__DATA_PTR_MEMORY_LIST3__(_P1,_P2)=__DATA_PTR_MEM_HELPER3__(__data, 0 ,  _P1 ,  _P2 )
 -D__VAR_MEMORY_LIST1__()=__VAR_MEM_HELPER1__(__data, 0 )
 -D__VAR_MEMORY_LIST2__(_P1)=__VAR_MEM_HELPER2__(__data, 0 ,  _P1 )
--D__VAR_MEMORY_LIST3__(_P1, _P2)=__VAR_MEM_HELPER3__(__data, 0 ,  _P1 ,  _P2 )
+-D__VAR_MEMORY_LIST3__(_P1,_P2)=__VAR_MEM_HELPER3__(__data, 0 ,  _P1 ,  _P2 )
 -D__VARD_MEMORY_LIST1__()=__VARD_MEM_HELPER1__(__data, 0, _ )
 -D__HEAP_MEMORY_LIST1__()=__HEAP_MEM_HELPER1__(__data, 0 )
 -D__HEAP_MEMORY_LIST2__(_P1)=__HEAP_MEM_HELPER2__(__data, 0 ,  _P1 )
--D__HEAP_MEMORY_LIST3__(_P1, _P2)=__HEAP_MEM_HELPER3__(__data, 0 ,  _P1 ,  _P2 )
+-D__HEAP_MEMORY_LIST3__(_P1,_P2)=__HEAP_MEM_HELPER3__(__data, 0 ,  _P1 ,  _P2 )
 -D__HVAR_MEMORY_LIST1__()=__HVAR_MEM_HELPER1__(__data, 0 )
 -D__HEAPD_MEMORY_LIST1__()=__HEAPD_MEM_HELPER1__(__data, 0, _ )
 -D__HEAPU_MEMORY_LIST1__()=__HEAPU_MEM_HELPER1__(__data, 0 )
 -D__TOPM_DATA_MEMORY_LIST1__()=
 -D__TOPM_DATA_MEMORY_LIST2__(_P1)=
--D__TOPM_DATA_MEMORY_LIST3__(_P1, _P2)=
+-D__TOPM_DATA_MEMORY_LIST3__(_P1,_P2)=
 -D__TOPP_DATA_MEMORY_LIST1__()=__TOPP_DATA_MEM_HELPER1__(__data, 0 )
 -D__TOPP_DATA_MEMORY_LIST2__(_P1)=__TOPP_DATA_MEM_HELPER2__(__data, 0 ,  _P1 )
--D__TOPP_DATA_MEMORY_LIST3__(_P1, _P2)=__TOPP_DATA_MEM_HELPER3__(__data, 0 ,  _P1 ,  _P2 )
+-D__TOPP_DATA_MEMORY_LIST3__(_P1,_P2)=__TOPP_DATA_MEM_HELPER3__(__data, 0 ,  _P1 ,  _P2 )
 -D__DATA_MEM0_SIZE_TYPE__=unsigned int
 -D__DATA_MEM0_INDEX_TYPE__=signed int
+-D__iar_fp2bits32(x)=0
+-D__iar_fp2bits64(x)=0
+-D__iar_fpgethi64(x)=0
+-D__iar_atomic_add_fetch(x,y,z)=0
+-D__iar_atomic_sub_fetch(x,y,z)=0
+-D__iar_atomic_load(x,y)=0ULL
+-D__iar_atomic_compare_exchange_weak(a,b,c,d,e)=0

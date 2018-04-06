@@ -193,12 +193,17 @@ void SysTick_Handler(void)
 /**
 * @brief This function handles USART2 global interrupt.
 */
+void HAL_UART_IDLECallback(UART_HandleTypeDef *huart);
 void USART2_IRQHandler(void)
 {
   /* USER CODE BEGIN USART2_IRQn 0 */
 
   /* USER CODE END USART2_IRQn 0 */
-  HAL_UART_IRQHandler(&huart2);
+  //HAL_UART_IRQHandler(&huart2);
+  if(__HAL_UART_GET_FLAG(&huart2, UART_FLAG_IDLE) != RESET){
+    HAL_UART_IDLECallback(&huart2);
+    return ;
+  }
   /* USER CODE BEGIN USART2_IRQn 1 */
 
   /* USER CODE END USART2_IRQn 1 */
@@ -247,6 +252,17 @@ void I2C3_EV_IRQHandler(void)
 }
 
 /* USER CODE BEGIN 1 */
+//extern DMA_HandleTypeDef hdma_usart6_rx;
+extern DMA_HandleTypeDef hdma_usart2_rx;
+void DMA1_Stream5_IRQHandler(void)
+{
+  /* USER CODE BEGIN DMA1_Stream5_IRQn 0 */
 
+  /* USER CODE END DMA1_Stream5_IRQn 0 */
+  HAL_DMA_IRQHandler(&hdma_usart2_rx);
+  /* USER CODE BEGIN DMA1_Stream5_IRQn 1 */
+
+  /* USER CODE END DMA1_Stream5_IRQn 1 */
+}
 /* USER CODE END 1 */
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

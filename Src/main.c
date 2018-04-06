@@ -51,6 +51,8 @@
 #include "command.h"
 #include "base.h"
 #include "ms5611.h"
+#include "dma.h"
+#include "angle.h"
 /* USER CODE END Includes */
 
 /* Private variables ---------------------------------------------------------*/
@@ -80,7 +82,7 @@ extern char buffer_rx_temp;
 
 void Set_Speed(int CHn,float speed);
 /* USER CODE END 0 */
-
+extern float Accel_E[3];
 int main(void)
 {
 
@@ -89,7 +91,7 @@ int main(void)
   /* USER CODE END 1 */
 
   /* MCU Configuration----------------------------------------------------------*/
-
+  
   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
   HAL_Init();
 
@@ -105,13 +107,14 @@ int main(void)
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
+  MX_DMA_Init();
   MX_GPIO_Init();
   MX_TIM6_Init();
   MX_I2C3_Init();           //i2C初始化中，调用了delay_us函数，所以TIM6必须先初始化
   
   MX_SPI2_Init();
   MX_ADC1_Init();
-  //MX_USART2_UART_Init();
+  MX_USART2_UART_Init();
   MX_TIM3_Init();
   MX_USART6_UART_Init();
 
@@ -124,21 +127,33 @@ int main(void)
 //  
   uprintf("hello,world!\r\n");
   /* USER CODE END 2 */
-
+  load_prams(0,0,0);
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  
+  
+  /*
+正方向：
+WX ：前倾为正
+WY：左倾为正
+WZ：逆时针为正
+ROLL :前倾为正
+*/
   while (1)
   {
   /* USER CODE END WHILE */
-    nrf_send_message(&NRF24l01);
-   // nrf_receive(&NRF24l01);
+    //nrf_send_message(&NRF24l01);
+    //nrf_receive(&NRF24l01);
     if(buffer_rx_OK){
       analize(buffer_rx);
       buffer_rx_OK=0;
     }
     if(Send_Wave_Flag){
       debug_send_wave();
+      //uprintf("%f\r\n",MS5611_Height);
+      //HAL_Delay(20);
     }
+    Get_Ace_Offset();
   /* USER CODE BEGIN 3 */
 
   }

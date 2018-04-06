@@ -25,7 +25,7 @@ if not "%~1" == "" goto debugFile
 
 @echo on 
 
-"E:\Program Files (x86)\IAR Systems\Embedded Workbench 8.0\common\bin\cspybat" -f "C:\Users\ncer\Desktop\code\PCB_QUADTOTOR_FLY_Control\EWARM\settings\aa.aa.general.xcl" --backend -f "C:\Users\ncer\Desktop\code\PCB_QUADTOTOR_FLY_Control\EWARM\settings\aa.aa.driver.xcl" 
+"D:\Program Files (x86)\IAR Systems\Embedded Workbench 8.0\common\bin\cspybat" -f "C:\Users\ncer\Desktop\四轴飞行器\EWARM\settings\aa.aa.general.xcl" --backend -f "C:\Users\ncer\Desktop\四轴飞行器\EWARM\settings\aa.aa.driver.xcl" 
 
 @echo off 
 goto end 
@@ -34,7 +34,7 @@ goto end
 
 @echo on 
 
-"E:\Program Files (x86)\IAR Systems\Embedded Workbench 8.0\common\bin\cspybat" -f "C:\Users\ncer\Desktop\code\PCB_QUADTOTOR_FLY_Control\EWARM\settings\aa.aa.general.xcl" "--debug_file=%~1" --backend -f "C:\Users\ncer\Desktop\code\PCB_QUADTOTOR_FLY_Control\EWARM\settings\aa.aa.driver.xcl" 
+"D:\Program Files (x86)\IAR Systems\Embedded Workbench 8.0\common\bin\cspybat" -f "C:\Users\ncer\Desktop\四轴飞行器\EWARM\settings\aa.aa.general.xcl" "--debug_file=%~1" --backend -f "C:\Users\ncer\Desktop\四轴飞行器\EWARM\settings\aa.aa.driver.xcl" 
 
 @echo off 
 :end

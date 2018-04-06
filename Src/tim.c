@@ -6,6 +6,7 @@
 #include "angle.h"
 #include "control.h"
 #include "ms5611.h"
+#include "nrf24l01.h"
 /* USER CODE END 0 */
 
 TIM_HandleTypeDef htim3;
@@ -72,7 +73,7 @@ void MX_TIM6_Init(void)
   TIM_MasterConfigTypeDef sMasterConfig;
 
   htim6.Instance = TIM6;
-  htim6.Init.Prescaler = 82;
+  htim6.Init.Prescaler = 83;
   htim6.Init.CounterMode = TIM_COUNTERMODE_UP;
   htim6.Init.Period = 65535;
   if (HAL_TIM_Base_Init(&htim6) != HAL_OK)
@@ -96,7 +97,7 @@ void MX_TIM7_Init(void)
   TIM_MasterConfigTypeDef sMasterConfig;
 
   htim7.Instance = TIM7;
-  htim7.Init.Prescaler = 82;
+  htim7.Init.Prescaler = 83;
   htim7.Init.CounterMode = TIM_COUNTERMODE_UP;
   htim7.Init.Period = 1999;
   if (HAL_TIM_Base_Init(&htim7) != HAL_OK)
@@ -261,15 +262,46 @@ void Delay_Us(uint32_t nus){
 
 extern float Get_Attitude_Data(int16_t raw_data,float range,int16_t offset);
 extern float Accel[3],Angle_Speed[3],Angle[3],Mag[3];
+extern float Accel_E[3]; //天地坐标系下的加速度
+extern float Velocity[3];
+extern float Height;
 extern char Motor_Open_Flag;
+
+extern float ace_sub;
+
 int count_2ms=0;
+extern NRF_Dev NRF24l01;
+extern uint32_t nrf_watch_dog;
+extern void set_stop(int arg_num,char **s,float * args);
+
+extern char NRF_Flag;
+
+
+
+
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
   int16_t ac[3],gy[3],mag[3];
+  
   int i;
-  float height;
   if(htim->Instance==TIM7){
     
     count_2ms++;
+    
+    
+    if(count_2ms%2==0){
+      if(NRF_Flag){
+        nrf_receive2(&NRF24l01);
+        nrf_watch_dog++;
+        if(nrf_watch_dog>500){
+          set_stop(0,0,0);
+          nrf_watch_dog=0;
+        }
+      }else{//蓝牙调试模式
+       // base_duty=40;
+      }
+    }
+    
+    
     if(count_2ms>5){
       MPU_ReadM_Mag(&MPU9250,mag);
       for(i=0;i<3;++i){
@@ -278,23 +310,32 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
       Scale_Mag(Mag);
       count_2ms=0;
     }
+
     MPU_Read6500(&MPU9250,ac,gy);
     for(i=0;i<3;++i){
       Accel[i]=Get_Attitude_Data(ac[i],MPU9250.setting->accel_range,0);
-      Angle_Speed[i]=Get_Attitude_Data(gy[i],MPU9250.setting->gyro_range,0);
+      Angle_Speed[i]=Get_Attitude_Data(gy[i],MPU9250.setting->gyro_range,Gyro_Offset[i]);
     }
-    
+    /* 旧飞机
     Accel[0]=Get_Scale_Data(Accel[0],-0.0057510772772645f,0.999396442718185f);
     Accel[1]=Get_Scale_Data(Accel[1],0.00776779781191153f,1.01650084564392f);
     Accel[2]=Get_Scale_Data(Accel[2],-0.00625840169339553f,0.984361130707526f);
+*/
+    Accel[0]=Get_Scale_Data(Accel[0],-0.0200311354256406f,1.01977103002458f);
+    Accel[1]=Get_Scale_Data(Accel[1],-0.000421249210775063f,1.011318642755862f);
+    Accel[2]=Get_Scale_Data(Accel[2],0.0411504643712059f,0.969637306791105f);
     
-    AHR_Update(Accel,Angle_Speed,Mag,Angle);
-    //IMU_Update(Accel,Angle_Speed,Angle);
-    //Free_Falling_Detect(Accel);
+    AHR_Update(Accel,Angle_Speed,Mag,Angle,Accel_E,!Is_Flying());
+    //IMU_Update(Accel,Angle_Speed,Angle,Accel_E);
+    Free_Falling_Detect(Accel_E,2);
     
     Fly_Control();
+    //Get_Velocity(Accel_E,Velocity,2,ace_sub);
     
-    MS5611_Read(&MS5611,&height);
+    Get_Position(Accel_E,Velocity,2,MS5611_Height,&Height);
+    
+    MS5611_Read(&MS5611);
+    
   }
 }
 
@@ -319,6 +360,7 @@ void Set_Speed(int CHn,float speed){
   uint32_t ccr=(int)(speed/100.0f*TIM3_PERIOD);
   *(&(TIM3->CCR1)+(CHn-1))=ccr>0?ccr:0;
 }
+
 /* USER CODE END 1 */
 
 /**

@@ -69,7 +69,8 @@ void HAL_TIM_MspPostInit(TIM_HandleTypeDef *htim);
                 
 
 /* USER CODE BEGIN Prototypes */
-#define TIM3_PERIOD 5250
+#define TIM3_PERIOD 5250*2  //Amazing,8K,发现当频率为16K及以上时,机体会有较大振动，ms5611会有较大噪声
+
 
 void Set_Speed(int CHn,float speed);
 /* USER CODE END Prototypes */

@@ -1,14 +1,23 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
-
+<?xml version="1.0" encoding="UTF-8"?>
 <userOverrides>
-  <override>
-    <path>C:\Users\ncer\Desktop\&#x56DB;&#x8F74;&#x98De;&#x884C;&#x5668;\Src\freertos.c</path>
-    <encoding>UTF-8</encoding>
-  </override>
-  <override>
-    <path>C:\Users\ncer\Desktop\&#x56DB;&#x8F74;&#x98De;&#x884C;&#x5668;\mydrivers\command.c</path>
-    <encoding>UTF-8</encoding>
-  </override>
+    <override>
+        <path>C:\Users\ncer\Desktop\四轴飞行器\Src\freertos.c</path>
+        <encoding>UTF-8</encoding>
+    </override>
+    <override>
+        <path>C:\Users\ncer\Desktop\四轴飞行器\Src\main.c</path>
+        <encoding>UTF-8</encoding>
+    </override>
+    <override>
+        <path>C:\Users\ncer\Desktop\四轴飞行器\Src\tim.c</path>
+        <encoding>UTF-8</encoding>
+    </override>
+    <override>
+        <path>C:\Users\ncer\Desktop\四轴飞行器\mydrivers\command.c</path>
+        <encoding>UTF-8</encoding>
+    </override>
+    <override>
+        <path>C:\Users\ncer\Desktop\四轴飞行器\mydrivers\nrf24l01.h</path>
+        <encoding>UTF-8</encoding>
+    </override>
 </userOverrides>
-
-

@@ -9,12 +9,12 @@ TriggerName=main
 LimitSize=0
 ByteLimit=50
 [DebugChecksum]
-Checksum=595602924
+Checksum=-621957370
 [Exceptions]
 StopOnUncaught=_ 0
 StopOnThrow=_ 0
 [CallStack]
-ShowArgs=0
+ShowArgs=1
 [Disassembly]
 MixedMode=1
 [JLinkDriver]
@@ -24,11 +24,11 @@ TraceStallIfFIFOFull=0x00000000
 TracePortSize=0x00000004
 [SWOTraceHWSettings]
 OverrideDefaultClocks=0
-CpuClock=72000000
+CpuClock=168000000
 ClockAutoDetect=0
-ClockWanted=2000000
-JtagSpeed=2250000
-Prescaler=32
+ClockWanted=4000000
+JtagSpeed=4500000
+Prescaler=37
 TimeStampPrescIndex=0
 TimeStampPrescData=0
 PcSampCYCTAP=1
@@ -39,6 +39,10 @@ ITMportsEnable=0
 ITMportsTermIO=0
 ITMportsLogFile=0
 ITMlogFile=$PROJ_DIR$\ITM.log
+[InterruptStripe]
+Sort=0
+[array_types]
+Fmt0=int16_t[3]	4	0
 [PowerLog]
 LogEnabled=0
 GraphEnabled=0
@@ -113,9 +117,11 @@ Exclusions=
 [Disassemble mode]
 mode=0
 [Breakpoints2]
-Bp0=_ 1 "EMUL_CODE" "{$PROJ_DIR$\..\mydrivers\nrf24l01.c}.53.3" 0 0 1 "" 0 "" 0
-Bp1=_ 1 "EMUL_CODE" "{$PROJ_DIR$\..\Src\freertos.c}.235.1" 0 0 1 "" 0 "" 0
-Count=2
+Bp0=_ 0 "EMUL_DATA" "MPU_Read6500" 0 0 0 0 4294967295
+Bp1=_ 0 "EMUL_DATA" "MPU_Read6500" 0 0 0 0 4294967295
+Bp2=_ 1 "EMUL_CODE" "{$PROJ_DIR$\..\Src\main.c}.117.3" 0 0 1 "" 0 "" 0
+Bp3=_ 1 "EMUL_CODE" "{$PROJ_DIR$\..\Src\i2c.c}.204.7" 0 0 1 "" 0 "" 0
+Count=4
 [Aliases]
 Count=0
 SuppressDialog=0

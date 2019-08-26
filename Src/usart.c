@@ -4,63 +4,51 @@
   * Description        : This file provides code for the configuration
   *                      of the USART instances.
   ******************************************************************************
-  * This notice applies to any and all portions of this file
+  ** This notice applies to any and all portions of this file
   * that are not between comment pairs USER CODE BEGIN and
   * USER CODE END. Other portions of this file, whether 
   * inserted by the user or by software development tools
   * are owned by their respective copyright owners.
   *
-  * Copyright (c) 2017 STMicroelectronics International N.V. 
-  * All rights reserved.
+  * COPYRIGHT(c) 2017 STMicroelectronics
   *
-  * Redistribution and use in source and binary forms, with or without 
-  * modification, are permitted, provided that the following conditions are met:
+  * Redistribution and use in source and binary forms, with or without modification,
+  * are permitted provided that the following conditions are met:
+  *   1. Redistributions of source code must retain the above copyright notice,
+  *      this list of conditions and the following disclaimer.
+  *   2. Redistributions in binary form must reproduce the above copyright notice,
+  *      this list of conditions and the following disclaimer in the documentation
+  *      and/or other materials provided with the distribution.
+  *   3. Neither the name of STMicroelectronics nor the names of its contributors
+  *      may be used to endorse or promote products derived from this software
+  *      without specific prior written permission.
   *
-  * 1. Redistribution of source code must retain the above copyright notice, 
-  *    this list of conditions and the following disclaimer.
-  * 2. Redistributions in binary form must reproduce the above copyright notice,
-  *    this list of conditions and the following disclaimer in the documentation
-  *    and/or other materials provided with the distribution.
-  * 3. Neither the name of STMicroelectronics nor the names of other 
-  *    contributors to this software may be used to endorse or promote products 
-  *    derived from this software without specific written permission.
-  * 4. This software, including modifications and/or derivative works of this 
-  *    software, must execute solely and exclusively on microcontroller or
-  *    microprocessor devices manufactured by or for STMicroelectronics.
-  * 5. Redistribution and use of this software other than as permitted under 
-  *    this license is void and will automatically terminate your rights under 
-  *    this license. 
-  *
-  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS" 
-  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT 
-  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
-  * PARTICULAR PURPOSE AND NON-INFRINGEMENT OF THIRD PARTY INTELLECTUAL PROPERTY
-  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT 
-  * SHALL STMICROELECTRONICS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
-  * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, 
-  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
-  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
-  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
-  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+  * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+  * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+  * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+  * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+  * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
   ******************************************************************************
   */
 
 /* Includes ------------------------------------------------------------------*/
 #include "usart.h"
-
+#include "base.h"
 #include "gpio.h"
 
 /* USER CODE BEGIN 0 */
 #include <stdarg.h>
-#include "FreeRTOS.h"
-#include "task.h"
-#include "cmsis_os.h"
 #include "command.h"
 char buffer_rx_temp;
 
-char buffer_rx[20];
+char buffer_rx[30];
+char GPS_Rx[100];
 
 int buffer_rx_count=0;
 
@@ -71,6 +59,7 @@ char buffer_rx_OK;
 UART_HandleTypeDef huart2;
 UART_HandleTypeDef huart6;
 
+DMA_HandleTypeDef hdma_usart2_rx;
 /* USART2 init function */
 
 void MX_USART2_UART_Init(void)
@@ -89,6 +78,12 @@ void MX_USART2_UART_Init(void)
     _Error_Handler(__FILE__, __LINE__);
   }
 
+   HAL_NVIC_SetPriority(USART2_IRQn, 4, 0);
+   HAL_NVIC_EnableIRQ(USART2_IRQn);
+    //开启空闲中断
+   __HAL_UART_ENABLE_IT(&huart2,UART_IT_IDLE);
+   HAL_UART_Receive_DMA(&huart2, (uint8_t *)GPS_Rx, 99);
+  
 }
 /* USART6 init function */
 
@@ -107,6 +102,10 @@ void MX_USART6_UART_Init(void)
   {
     _Error_Handler(__FILE__, __LINE__);
   }
+
+    HAL_NVIC_SetPriority(USART6_IRQn, 4, 0);
+    HAL_NVIC_EnableIRQ(USART6_IRQn);
+    HAL_UART_Receive_IT(&huart6,(uint8_t *)&buffer_rx_temp,1);
 
 }
 
@@ -133,11 +132,27 @@ void HAL_UART_MspInit(UART_HandleTypeDef* uartHandle)
     GPIO_InitStruct.Alternate = GPIO_AF7_USART2;
     HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
+    hdma_usart2_rx.Instance = DMA1_Stream5;
+    hdma_usart2_rx.Init.Channel = DMA_CHANNEL_4;
+    hdma_usart2_rx.Init.Direction = DMA_PERIPH_TO_MEMORY;
+    hdma_usart2_rx.Init.PeriphInc = DMA_PINC_DISABLE;
+    hdma_usart2_rx.Init.MemInc = DMA_MINC_ENABLE;
+    hdma_usart2_rx.Init.PeriphDataAlignment = DMA_PDATAALIGN_BYTE;
+    hdma_usart2_rx.Init.MemDataAlignment = DMA_MDATAALIGN_BYTE;
+    hdma_usart2_rx.Init.Mode = DMA_NORMAL;
+    hdma_usart2_rx.Init.Priority = DMA_PRIORITY_MEDIUM;
+    hdma_usart2_rx.Init.FIFOMode = DMA_FIFOMODE_DISABLE;
+    if (HAL_DMA_Init(&hdma_usart2_rx) != HAL_OK)
+    {
+      _Error_Handler(__FILE__, __LINE__);
+    }
+
+    __HAL_LINKDMA(uartHandle,hdmarx,hdma_usart2_rx);
     /* USART2 interrupt Init */
-    HAL_NVIC_SetPriority(USART2_IRQn, 5, 0);
-    HAL_NVIC_EnableIRQ(USART2_IRQn);
+    HAL_NVIC_SetPriority(USART2_IRQn, 6, 0);
+    HAL_NVIC_EnableIRQ(USART2_IRQn);;
   /* USER CODE BEGIN USART2_MspInit 1 */
-    HAL_UART_Receive_IT(&huart2,&buffer_rx_temp,1);
+
   /* USER CODE END USART2_MspInit 1 */
   }
   else if(uartHandle->Instance==USART6)
@@ -160,8 +175,9 @@ void HAL_UART_MspInit(UART_HandleTypeDef* uartHandle)
     HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
     /* USART6 interrupt Init */
-    HAL_NVIC_SetPriority(USART6_IRQn, 6, 0);
+    HAL_NVIC_SetPriority(USART6_IRQn, 4, 0);
     HAL_NVIC_EnableIRQ(USART6_IRQn);
+    HAL_UART_Receive_IT(&huart6,(uint8_t *)&buffer_rx_temp,1);
   /* USER CODE BEGIN USART6_MspInit 1 */
 
   /* USER CODE END USART6_MspInit 1 */
@@ -225,30 +241,66 @@ void uprintf(char *fmt, ...)
 	
 	size=vsnprintf(uart_buffer, 100 + 1, fmt, arg_ptr);
 	va_end(arg_ptr);
-    HAL_UART_Transmit(&huart2,uart_buffer, size,1000);
+    HAL_UART_Transmit(&huart6,(uint8_t *)uart_buffer, size,1000);
 	
 }
 
-extern osThreadId AnalizeUsartTaskHandle;
+extern void end(int arg_num,char **s,float *arg);
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart){
-    long xHigherPriorityTaskWoken = pdFALSE;
-    
-	if(huart->Instance==USART2){
+	if(huart->Instance==USART6){
+      /*
+        if(buffer_rx_temp=='z'){
+           end(0,0,0);
+           HAL_UART_Receive_IT(&huart6,&buffer_rx_temp,1);
+           return ;
+        }
+      */
 		buffer_rx[buffer_rx_count]=buffer_rx_temp;
+
 		if(buffer_rx[buffer_rx_count-1]=='\r'&&buffer_rx[buffer_rx_count]=='\n'){
-			//buffer_rx_OK=1;
+			buffer_rx_OK=1;
 			buffer_rx[buffer_rx_count-1]='\0';
 			buffer_rx_count=0;
-            vTaskNotifyGiveFromISR(AnalizeUsartTaskHandle,&xHigherPriorityTaskWoken);
-			portYIELD_FROM_ISR(xHigherPriorityTaskWoken); 
 		}else{
 			buffer_rx_count++;
-            HAL_UART_Receive_IT(huart,&buffer_rx_temp,1);
+            HAL_UART_Receive_IT(&huart6,(uint8_t *)&buffer_rx_temp,1);
 		}
 	}
 }
 
 /* USER CODE END 1 */
+
+void HAL_UART_IDLECallback(UART_HandleTypeDef *huart){
+  uint8_t temp;
+  GPRMC GPS;
+  __HAL_UART_CLEAR_IDLEFLAG(huart);
+  /*
+  if(huart->Instance==USART6){
+    HAL_UART_DMAStop(&huart6);
+    analize(buffer_rx);
+    
+    temp= huart->Instance->SR;
+    temp= huart->Instance->DR;//读出串口的数据，防止在关闭DMA期间有数据进来，造成ORE错误
+    huart->hdmarx->XferCpltCallback(huart->hdmarx);
+    HAL_UART_Receive_DMA(&huart6,(uint8_t *) buffer_rx, 30);
+  }else 
+   */ 
+  if(huart->Instance==USART2){
+    HAL_UART_DMAStop(&huart2);
+    
+    //处理GPS数据
+    if(Analize_GPS(GPS_Rx,&GPS)){
+      uprintf("%f \r\n%f \r\n",GPS.Lat,GPS.Long);
+    }
+    temp= huart->Instance->SR;
+    temp= huart->Instance->DR;//读出串口的数据，防止在关闭DMA期间有数据进来，造成ORE错误
+    
+    huart->hdmarx->XferCpltCallback(huart->hdmarx);
+    
+    HAL_UART_Receive_DMA(&huart2, (uint8_t *)GPS_Rx, 99);
+  }
+  
+}
 
 /**
   * @}
